@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <input type="text" id="ticketData" placeholder="Enter ticket data">
+    <button id="generateQR">Generate QR Code</button>
+    <div id="qrcode"></div>
+
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+    <script>
+        document.getElementById('generateQR').addEventListener('click', function () {
+            const ticketData = document.getElementById('ticketData').value;
+
+            if (!ticketData) {
+                alert("Please enter some data!");
+                return;
+            }
+
+            // Clear any existing QR code
+            document.getElementById('qrcode').innerHTML = '';
+
+            // Generate the QR code
+            new QRCode(document.getElementById('qrcode'), {
+                text: ticketData,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H,
+            });
+        });
+    </script>
+</body>
+</html>

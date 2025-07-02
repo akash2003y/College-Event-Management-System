@@ -1,0 +1,26 @@
+<div id="reader" style="width: 300px;"></div>
+<div>
+    <h3>Scanned Result:</h3>
+    <p id="result"></p>
+</div>
+
+<script>
+    const resultElement = document.getElementById('result');
+
+    // Initialize QR Code scanner
+    function onScanSuccess(decodedText, decodedResult) {
+        resultElement.innerHTML = `Scanned Text: ${decodedText}`;
+        console.log(`Decoded text: ${decodedText}`, decodedResult);
+    }
+
+    function onScanFailure(error) {
+        console.warn(`Error scanning QR code: ${error}`);
+    }
+
+    const html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+        fps: 10, // Frames per second for scanning
+        qrbox: { width: 250, height: 250 } // Size of the scanning box
+    });
+
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+</script>
